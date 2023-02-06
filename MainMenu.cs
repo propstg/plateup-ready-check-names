@@ -7,8 +7,8 @@ using UnityEngine;
 namespace ReadyCheckNames {
     public class MainMenu<T> : KLMenu<T> {
 
-        private static readonly List<int> displayTypeValues = new List<int> { 0, 1 };
-        private static readonly List<string> displayTypeLabels = new List<string> { "Steam Name", "Profile Name" };
+        private static readonly List<int> displayTypeValues = new List<int> { 0, 1, 2 };
+        private static readonly List<string> displayTypeLabels = new List<string> { "Steam Name", "Profile Name", "Numbers Only" };
 
         public MainMenu(Transform container, ModuleList module_list) : base(container, module_list) { }
 

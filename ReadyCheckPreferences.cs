@@ -5,6 +5,7 @@ namespace ReadyCheckNames {
 
         public static readonly int STEAM_NAME = 0;
         public static readonly int PROFILE_NAME = 1;
+        public static readonly int NUMBERS_ONLY = 2;
 
         public static readonly Pref DisplayType = new Pref(ReadyCheckNamesMod.MOD_ID, nameof(DisplayType));
 
