@@ -45,8 +45,6 @@ namespace ReadyCheckNames {
         }
 
         private static string getName(PlayerInfo player) {
-            Debug.Log($"player.name: '{player.Name}', player.profileName: '{player.Profile.Name}'");
-
             if (ReadyCheckPreferences.isSteamNameSelected()) {
                 return player.Username.Substring(0, 2);
             } else if (player.Profile.Name == null || "New chef".Equals(player.Profile.Name) || ReadyCheckPreferences.getDisplayType() == ReadyCheckPreferences.NUMBERS_ONLY) {

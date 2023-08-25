@@ -14,9 +14,9 @@ namespace ReadyCheckNames {
         public const string MOD_ID = "blargle.ReadyCheckNames";
         public const string MOD_NAME = "Ready Check Names";
         public const string MOD_AUTHOR = "blargle";
-        public const string MOD_VERSION = "0.0.3";
+        public const string MOD_VERSION = "0.0.4";
 
-        public ReadyCheckNamesMod() : base(MOD_ID, MOD_NAME, MOD_AUTHOR, MOD_VERSION, ">=1.1.3", Assembly.GetExecutingAssembly()) { }
+        public ReadyCheckNamesMod() : base(MOD_ID, MOD_NAME, MOD_AUTHOR, MOD_VERSION, ">=1.1.7", Assembly.GetExecutingAssembly()) { }
 
         protected override void OnInitialise() {
             setupPatchFonts();
