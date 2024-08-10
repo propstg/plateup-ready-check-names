@@ -14,9 +14,9 @@ namespace ReadyCheckNames {
         public const string MOD_ID = "blargle.ReadyCheckNames";
         public const string MOD_NAME = "Ready Check Names";
         public const string MOD_AUTHOR = "blargle";
-        public const string MOD_VERSION = "0.0.4";
+        public const string MOD_VERSION = "0.0.5";
 
-        public ReadyCheckNamesMod() : base(MOD_ID, MOD_NAME, MOD_AUTHOR, MOD_VERSION, ">=1.1.7", Assembly.GetExecutingAssembly()) { }
+        public ReadyCheckNamesMod() : base(MOD_ID, MOD_NAME, MOD_AUTHOR, MOD_VERSION, ">=1.2.0", Assembly.GetExecutingAssembly()) { }
 
         protected override void OnInitialise() {
             setupPatchFonts();
@@ -33,9 +33,9 @@ namespace ReadyCheckNames {
         }
 
         private void initMenu() {
-            ModsPreferencesMenu<PauseMenuAction>.RegisterMenu(MOD_NAME, typeof(MainMenu<PauseMenuAction>), typeof(PauseMenuAction));
-            Events.PreferenceMenu_PauseMenu_CreateSubmenusEvent += (s, args) => {
-                args.Menus.Add(typeof(MainMenu<PauseMenuAction>), new MainMenu<PauseMenuAction>(args.Container, args.Module_list));
+            ModsPreferencesMenu<MenuAction>.RegisterMenu(MOD_NAME, typeof(MainMenu<MenuAction>), typeof(MenuAction));
+            Events.PlayerPauseView_SetupMenusEvent += (s, args) => {
+                args.addMenu.Invoke(args.instance, new object[] { typeof(MainMenu<MenuAction>), new MainMenu<MenuAction>(args.instance.ButtonContainer, args.module_list) });
             };
         }
     }
