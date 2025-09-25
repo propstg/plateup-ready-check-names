@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace ReadyCheckNames {
 
+    /*
     [HarmonyPatch(typeof(ConsentElement), "UpdateTicks")]
     class ConsentElement_UpdateTicks_Patch {
 
@@ -35,6 +36,7 @@ namespace ReadyCheckNames {
             ___ContinueTicks.font = overriddenFontAsset;
         }
     }
+    */
 
     class ReadyCheckNamesUtil {
 
