@@ -1,47 +1,39 @@
 ﻿using HarmonyLib;
 using Kitchen;
 using Kitchen.Modules;
-using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 
 namespace ReadyCheckNames {
 
-    /*
-    [HarmonyPatch(typeof(ConsentElement), "UpdateTicks")]
-    class ConsentElement_UpdateTicks_Patch {
+    [HarmonyPatch(typeof(ConsentElementTick), "Setup")]
+    class ConsentElementTick_Setup_Patch {
 
-        public static TMP_FontAsset overriddenFontAsset;
+        public static TextMeshPro textMeshPro;
 
-        public static void Postfix(TextMeshPro ___Ticks, Dictionary<int, bool> ___Consents) {
-            List<string> names = new List<string>();
-            foreach (KeyValuePair<int, bool> consent in ___Consents) {
-                if (consent.Value) {
-                    names.Add(ReadyCheckNamesUtil.createPlayerNameString(consent.Key));
-                }
+        public static void Postfix(ConsentElementTick __instance, SpriteRenderer ___Tick, int sides, bool ready) {
+            TextMeshPro tmp = Object.Instantiate<TextMeshPro>(textMeshPro, __instance.transform, true);
+            tmp.transform.position = __instance.transform.position + Vector3.up + (Vector3.back / 4);
+            tmp.gameObject.SetActive(ready);
+            tmp.fontSize = 16;
+            tmp.text = ReadyCheckNamesUtil.createPlayerNameString(sides);
+            ___Tick.gameObject.SetActive(false);
+            SetLayerRecursively(tmp.gameObject, LayerMask.NameToLayer("UI"));
+        }
+
+        static void SetLayerRecursively(GameObject obj, int layer) {
+            obj.layer = layer;
+            foreach (Transform child in obj.transform) {
+                SetLayerRecursively(child.gameObject, layer);
             }
-            ___Ticks.text = string.Join(", ", names.ToArray());
-            ___Ticks.font = overriddenFontAsset;
         }
     }
-
-    [HarmonyPatch(typeof(EndPracticeView), "UpdateData")]
-    class EndPracticeView_OnUpdate_Patch {
-
-        public static TMP_FontAsset overriddenFontAsset;
-
-        public static void Postfix(TextMeshPro ___ContinueTicks, HashSet<int> ___Consents) {
-            ___ContinueTicks.text = string.Join(", ", ___Consents.Select(ReadyCheckNamesUtil.createPlayerNameString).ToArray());
-            ___ContinueTicks.font = overriddenFontAsset;
-        }
-    }
-    */
 
     class ReadyCheckNamesUtil {
 
         public static string createPlayerNameString(int playerId) {
-            var player = Players.Main.Get(playerId);
+            var player = Players.Main.All().Where(p => p.Index == playerId).FirstOrDefault();
             string color = ColorUtility.ToHtmlStringRGB(player.Profile.Colour);
             return $"<color=#{color}>{getName(player)}</color>";
         }
